@@ -1,0 +1,85 @@
+const fs = require('fs/promises');
+const path = require('path');
+
+/**
+ * Asynchronously generates a unique name for a file or directory within a given folder.
+ * If the provided name already exists in the folder, a suffix is appended to create a unique name.
+ *
+ * @async
+ * @function
+ * @param {string} folderPath - The path to the folder where the name should be unique.
+ * @param {string} name - The desired name for the file or directory.
+ * @returns {Promise<string|undefined>} - A promise that resolves to a unique name, or `undefined` if the folder does not exist.
+ */
+
+async function getUniqueName(folderPath, name) {
+
+    if (! await directoryExists(folderPath)) {
+        console.error(`'${folderPath}' directory doesn't exist.`);
+        return;
+    };
+
+    const fullPath = path.join(folderPath, name);
+    if (! await directoryExists(fullPath)) {
+        return name;
+    }
+
+    const type = await getType(fullPath) // file or directory
+    if (!type) return;
+
+    if (type == 'directory') {
+        return await appendSuffix(folderPath, name);
+    } else {
+        const extension = path.extname(fullPath);
+        const fileName = path.basename(fullPath, extension);
+
+        return await appendSuffix(folderPath, fileName, extension) + extension;
+    }
+}
+
+async function appendSuffix(folderPath, name, extension = '') {
+    let uniqueName = name;
+
+    do{
+        const parts = uniqueName.split('_');
+        const suffix = parts.at(-1);
+        const index = Number.isInteger(Number(suffix)) ? parseInt(suffix) : NaN;
+
+        if (!isNaN(index)) {
+            parts[parts.length - 1] = (index + 1).toString();
+            uniqueName = parts.join('_');
+        } else {
+            uniqueName += '_1';
+        }
+
+    } while(await directoryExists(path.join(folderPath, uniqueName + extension)));
+
+    return uniqueName;
+}
+
+
+async function getType(path) {
+    try {
+        const stats = await fs.stat(path);
+
+        if (stats.isFile()) {
+            return 'file';
+        } else if (stats.isDirectory()) {
+            return 'directory';
+        }
+    } catch (error) {
+        console.error(error);
+        return;
+    }
+}
+
+async function directoryExists(path) {
+    try {
+        await fs.access(path);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+module.exports = getUniqueName;
