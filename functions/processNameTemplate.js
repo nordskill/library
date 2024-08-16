@@ -8,10 +8,9 @@ const tokens = require('../data/tokens.js');
  * @returns {string|undefined} - The generated name with placeholders replaced by their corresponding values, or `undefined` if an error occurs.
  */
 
-function generateName(namingRule) {
+function processNameTemplate(namingRule) {
     if (!namingRule) {
-        console.error('Please, provide a naming rule.');
-        return;
+        throw new Error('Please, provide a naming rule.');
     }
 
     const matches = namingRule.match(/{(.*?)}/g);
@@ -25,8 +24,7 @@ function generateName(namingRule) {
 
     for(const token of extractedTokens) {
         if (!tokens[token]) {
-            console.error(`Couldn't find a token in the object.`)
-            return;
+            throw new Error("Couldn't find a token in the object.");
         }
 
         output = output.replace(new RegExp(`{${token}}`, 'g'), tokens[token].value || '')
@@ -35,4 +33,4 @@ function generateName(namingRule) {
     return output;
 }
 
-module.exports = generateName;
+module.exports = processNameTemplate;

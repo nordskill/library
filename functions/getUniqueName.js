@@ -13,27 +13,29 @@ const path = require('path');
  */
 
 async function getUniqueName(folderPath, name) {
+    try {
+        if (! await directoryExists(folderPath)) {
+            throw new Error(`${folderPath} directory doesn't exist.`);
+        };
 
-    if (! await directoryExists(folderPath)) {
-        console.error(`'${folderPath}' directory doesn't exist.`);
-        return;
-    };
+        const fullPath = path.join(folderPath, name);
+        if (! await directoryExists(fullPath)) {
+            return name;
+        }
 
-    const fullPath = path.join(folderPath, name);
-    if (! await directoryExists(fullPath)) {
-        return name;
-    }
+        const type = await getType(fullPath) // file or directory
+        if (!type) return;
 
-    const type = await getType(fullPath) // file or directory
-    if (!type) return;
+        if (type == 'directory') {
+            return await appendSuffix(folderPath, name);
+        } else {
+            const extension = path.extname(fullPath);
+            const fileName = path.basename(fullPath, extension);
 
-    if (type == 'directory') {
-        return await appendSuffix(folderPath, name);
-    } else {
-        const extension = path.extname(fullPath);
-        const fileName = path.basename(fullPath, extension);
-
-        return await appendSuffix(folderPath, fileName, extension) + extension;
+            return await appendSuffix(folderPath, fileName, extension) + extension;
+        }
+    } catch (error) {
+        throw error;
     }
 }
 
@@ -68,8 +70,7 @@ async function getType(path) {
             return 'directory';
         }
     } catch (error) {
-        console.error(error);
-        return;
+        throw new Error(`Failed to determine the type of the path '${path}': ${error.message}`);
     }
 }
 

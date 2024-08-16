@@ -3,9 +3,9 @@ const path = require('path')
 const getUniqueName = require('../functions/getUniqueName.js');
 
 describe('Getting unique name of a file/folder', () => {
-    test('check if path exists', async () => {
-        const result = await getUniqueName(path.join(__dirname, './balbablabla'), 'index.js')
-        expect(result).toBe(undefined)
+    test('check if path exists', () => {
+        const result = async () => await getUniqueName(path.join(__dirname, './balbablabla'), 'index.js')
+        expect(result).rejects.toThrow();
     });
 
     test("file name doesn't exist", async () => {
