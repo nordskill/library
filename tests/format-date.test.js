@@ -1,0 +1,28 @@
+const formatDate = require('../functions/format-date.js');
+
+describe("Get a date in given format", () => {
+    test("No arguments given", () => {
+        const result = () => formatDate();
+        expect(result).toThrow();
+    });
+
+    test("yyyy-mm-dd style", () => {
+        const result = formatDate(new Date(2024, 7, 17), 'yyyy-mm-dd');
+        expect(result).toBe('2024-08-17');
+    });
+
+    test("yyyymmdd style", () => {
+        const result = formatDate(new Date(2024, 7, 17), 'yyyymmdd');
+        expect(result).toBe('20240817');
+    });
+
+    test("dd mon yyyy style", () => {
+        const result = formatDate(new Date(2024, 7, 17), 'dd mon yyyy');
+        expect(result).toBe('17 Aug 2024')
+    })
+
+    test('Unknown style', () => {
+        const result = formatDate(new Date(2024, 7, 17), 'yymmdd');
+        expect(result).toBeUndefined();
+    })
+})

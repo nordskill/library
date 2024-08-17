@@ -18,8 +18,8 @@ describe('Getting unique name of a file/folder', () => {
     });
 
     test("file exists", async () => {
-        const result = await getUniqueName(path.join(__dirname, '../tests'), 'getUniqueName.test.js');
-        expect(result).toBe('getUniqueName.test_1.js');
+        const result = await getUniqueName(path.join(__dirname, '../tests'), 'get-unique-name.test.js');
+        expect(result).toBe('get-unique-name.test_1.js');
     });
 
     test("file exists", async () => {

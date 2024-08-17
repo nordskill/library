@@ -1,4 +1,4 @@
-const tokens = require('../data/tokens.js');
+const tokens = require('../utils/tokens.js');
 
 /**
  * Generates a name based on a provided naming rule, replacing placeholders with corresponding values from a predefined tokens object.
