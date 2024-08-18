@@ -28,6 +28,10 @@ const FORMAT = 'webp';
 
 async function resizeImage(originalPath, widths, targetPath) {
     try {
+        if (!originalPath || !targetPath) {
+            throw new Error(!originalPath ? 'No original path provided.' : 'No target path provided.');
+        }
+
         const metadata = await sharp(originalPath).metadata();
         const isWebP = metadata.format === FORMAT;
         const originalFileName = path.basename(originalPath, path.extname(originalPath));
