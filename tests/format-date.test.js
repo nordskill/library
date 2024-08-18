@@ -16,8 +16,8 @@ describe("Get a date in given format", () => {
         expect(result).toBe('20240817');
     });
 
-    test("dd mon yyyy style", () => {
-        const result = formatDate(new Date(2024, 7, 17), 'dd mon yyyy');
+    test("dd Mon yyyy style", () => {
+        const result = formatDate(new Date(2024, 7, 17), 'dd Mon yyyy');
         expect(result).toBe('17 Aug 2024')
     })
 

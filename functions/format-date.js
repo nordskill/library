@@ -28,7 +28,7 @@ function formatDate(date, style) {
 			return `${year}-${month}-${day}`;
 		case 'yyyymmdd':
 			return `${year}${month}${day}`;
-		case 'dd mon yyyy':
+		case 'dd Mon yyyy':
 			return `${day} ${date.toLocaleString('en-us', { month: 'short' })} ${year}`;
 		default:
 			break;
