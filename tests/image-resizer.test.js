@@ -1,5 +1,5 @@
 const path = require('path');
-const imageResizer = require('../functions/image-resizer.js');
+const imageResizer = require('../backend-functions/image-resizer.js');
 
 describe('Resize an image to given widths and save them at the given path', () => {
     test('No original path', async () => {

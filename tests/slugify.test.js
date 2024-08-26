@@ -1,4 +1,4 @@
-const slugify = require('../functions/slugify.js');
+const slugify = require('../backend-functions/slugify.js');
 
 describe("Creating a slug of a given string", () => {
     test('returns "undefined" if no input provided', () => {
