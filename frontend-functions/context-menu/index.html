@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Right-Click Context Menu</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            div[popover] {
+                border: none;
+                box-shadow: none;
+                overflow: unset;
+            }
+        }
+
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* Context menu styling */
+        #context-menu {
+            position: absolute;
+            background-color: #333;
+            min-width: 200px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        #context-menu ul {
+            list-style-type: none;
+        }
+
+        #context-menu ul li {
+            position: relative;
+            width: 300px;
+        }
+
+        #context-menu ul li a {
+            display: block;
+            padding: 10px 15px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Submenu styling */
+        #context-menu ul ul {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background-color: #444;
+        }
+
+        /* Show submenus on hover */
+        #context-menu ul li:hover > ul {
+            display: block;
+        }
+
+        /* Highlight on hover */
+        #context-menu ul li:hover > a {
+            background-color: #555;
+        }
+
+        #sub3, #sub4 {
+            width: 200px;
+        }
+
+        .container {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <script type="module">
+        import contextMenu from './context-menu.js';
+
+        const container = document.querySelector('.container');
+
+        const changePosition = (axisY, axisX) => {
+            container.style.left   = axisX === 'left'   ? '0' : '';
+            container.style.right  = axisX === 'right'  ? '0' : '';
+
+            container.style.top    = axisY === 'top'    ? '0' : '';
+            container.style.bottom = axisY === 'bottom' ? '0' : '';
+        }
+
+        const changeBackgroundColor = color => container.style.backgroundColor = color;
+
+        const changeSize = amount => {
+            const { width, height } = container.getBoundingClientRect();
+
+            container.style.width = width * amount + 'px';
+            container.style.height = height * amount + 'px';
+        }
+
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+
+            contextMenu.init({
+                menu: [
+                    {
+                        label: 'Change position',
+                        submenu: [
+                            {
+                                label: 'Top-left corner',
+                                on_click: () => changePosition('top', 'left')
+                            },
+                            {
+                                label: 'Top-right corner',
+                                on_click: () => changePosition('top', 'right')
+                            },
+                            {
+                                label: 'Bottom-right corner',
+                                on_click: () => changePosition('bottom', 'right')
+                            },
+                            {
+                                label: 'Bottom-left corner',
+                                on_click: () => changePosition('bottom', 'left')
+                            }
+                        ]
+                    },
+                    {
+                        label: "Change container's background color",
+                        submenu: [
+                            {
+                                label: 'Cyan',
+                                on_click: () => changeBackgroundColor('cyan')
+                            },
+                            {
+                                label: 'Magenta',
+                                on_click: () => changeBackgroundColor('magenta')
+                            },
+                            {
+                                label: 'Yellow',
+                                on_click: () => changeBackgroundColor('yellow')
+                            },
+                            {
+                                label: 'Key',
+                                on_click: () => changeBackgroundColor('black')
+                            }
+                        ]
+                    },
+                    {
+                        label: "Resize container",
+                        submenu: [
+                            {
+                                label: 'Decrease size',
+                                submenu: [
+                                    {
+                                        label: '10%',
+                                        on_click: () => changeSize(.9)
+                                    },
+                                    {
+                                        label: '25%',
+                                        on_click: () => changeSize(.75)
+                                    },
+                                    {
+                                        label: '50%',
+                                        on_click: () => changeSize(.5)
+                                    }
+                                ]
+                            },
+                            {
+                                label: 'Increase size',
+                                submenu: [
+                                    {
+                                        label: '25%',
+                                        on_click: () => changeSize(1.25)
+                                    },
+                                    {
+                                        label: '50%',
+                                        on_click: () => changeSize(1.5)
+                                    },
+                                    {
+                                        label: '100%',
+                                        on_click: () => changeSize(2)
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                ],
+            });
+
+            contextMenu.show(e);
+        })
+
+    </script>
+</body>
+</html>
