@@ -1,4 +1,4 @@
-const formatDate = require('../backend-functions/format-date.js');
+const formatDate = require('../functions/format-date.js');
 
 describe("Get a date in given format", () => {
     test("No arguments given", () => {

@@ -1,5 +1,5 @@
 const path = require('path');
-const ensureFolderExists = require('../backend-functions/ensure-folder-exists.js');
+const ensureFolderExists = require('../functions/ensure-folder-exists.js');
 
 beforeEach(() => {
     jest.clearAllMocks();

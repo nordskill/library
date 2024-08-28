@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-const stripHtml = require('../backend-functions/strip-html.js');
+const stripHtml = require('../functions/strip-html.js');
 
 describe('Getting a text content out of a given HTML code', () => {
 
