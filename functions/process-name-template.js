@@ -1,4 +1,4 @@
-const tokens = require('../utils/tokens.js');
+import tokens from '../utils/tokens.js';
 
 /**
  * Generates a name based on a provided naming rule, replacing placeholders with corresponding values from a predefined tokens object.
@@ -33,4 +33,4 @@ function processNameTemplate(namingRule) {
     return output;
 }
 
-module.exports = processNameTemplate;
+export default processNameTemplate;

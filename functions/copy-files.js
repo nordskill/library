@@ -1,5 +1,5 @@
-const fs = require('fs').promises;
-const path = require('path');
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
 /**
  * Copies a file or directory contents from one location to another.
@@ -8,6 +8,7 @@ const path = require('path');
  * @param {string} [fileName] - Optional. If provided, only this file will be copied.
  * @returns {Promise<void>}
  */
+
 async function copyFiles(from, to, fileName = null) {
     try {
         if (fileName) {
@@ -45,4 +46,4 @@ async function copyFiles(from, to, fileName = null) {
     }
 }
 
-module.exports = copyFiles;
+export default copyFiles

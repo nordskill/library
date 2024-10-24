@@ -12,4 +12,4 @@ function stripHtml(html) {
     return temp.textContent || temp.innerText || "";
 }
 
-module.exports = stripHtml;
+export default stripHtml;

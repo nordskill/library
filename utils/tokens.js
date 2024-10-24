@@ -11,4 +11,4 @@ const tokens = {
     }
 }
 
-module.exports = tokens
+export default tokens

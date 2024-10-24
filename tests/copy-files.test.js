@@ -1,5 +1,5 @@
-const path = require('path')
-const copyFiles = require('../functions/copy-files.js');
+import path from 'node:path';
+import copyFiles from '../functions/copy-files.js';
 
 describe('Copying file or directory from one location to another', () => {
     test('No original path and no file', () => {

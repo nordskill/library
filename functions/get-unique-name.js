@@ -1,5 +1,5 @@
-const fs = require('fs/promises');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 
 /**
  * Asynchronously generates a unique name for a file or directory within a given folder.
@@ -83,4 +83,4 @@ async function directoryExists(path) {
     }
 }
 
-module.exports = getUniqueName;
+export default getUniqueName;

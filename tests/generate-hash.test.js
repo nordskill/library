@@ -1,5 +1,5 @@
-const path = require('path');
-const generateHash = require('../functions/generate-hash.js');
+import path from 'node:path';
+import generateHash from '../functions/generate-hash';
 
 describe('Generate a hash for a file at the given path', () => {
     test('No path given', () => {

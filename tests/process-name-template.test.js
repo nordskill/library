@@ -1,4 +1,4 @@
-const processNameTemplate = require('../functions/process-name-template.js');
+import processNameTemplate from '../functions/process-name-template';
 
 describe('Generating a name based on a naming rule and predefined token object.', () => {
     test('Empty rule', () => {

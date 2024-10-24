@@ -1,5 +1,5 @@
-const path = require('path');
-const ensureFolderExists = require('../functions/ensure-folder-exists.js');
+import path from 'node:path';
+import ensureFolderExists from '../functions/ensure-folder-exists';;
 
 beforeEach(() => {
     jest.clearAllMocks();

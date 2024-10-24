@@ -1,5 +1,5 @@
-const fs = require('fs');
-const crypto = require('crypto');
+import fs from 'node:fs';
+import crypto from 'node:crypto';
 
 /**
  * Asynchronously generates a SHA-256 hash for a file at the given path.
@@ -21,4 +21,4 @@ async function generateHash(path){
       });
 }
 
-module.exports = generateHash;
+export default generateHash;

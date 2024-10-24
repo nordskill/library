@@ -34,4 +34,4 @@ function formatDate(date, style) {
 			break;
 	}
 }
-module.exports = formatDate;
+export default formatDate;

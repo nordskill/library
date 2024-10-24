@@ -1,4 +1,4 @@
-const fs = require('fs').promises;
+import fs from 'node:fs/promises';
 
 /**
  * Asynchronously checks if a path exists, and if it doesn't, creates the folders recursively.
@@ -24,4 +24,4 @@ async function ensureFolderExists(dirPath) {
     }
 }
 
-module.exports = ensureFolderExists;
+export default ensureFolderExists;

@@ -1,7 +1,8 @@
-const sharp = require('sharp');
-const { performance } = require('perf_hooks');
-const ensureFolderExists = require('./ensure-folder-exists');
-const path = require('path');
+import path from 'node:path';
+import sharp from 'sharp';
+import { performance } from 'perf_hooks';
+
+import ensureFolderExists from './ensure-folder-exists';
 
 const FORMAT = 'webp';
 
@@ -84,4 +85,4 @@ async function resizeImage(originalPath, widths, targetPath) {
     }
 }
 
-module.exports = resizeImage;
+export default resizeImage;

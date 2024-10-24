@@ -1,5 +1,5 @@
-const path = require('path')
-const getUniqueName = require('../functions/get-unique-name.js');
+import path from 'node:path';
+import getUniqueName from '../functions/get-unique-name';
 
 describe('Getting unique name of a file/folder', () => {
     test('check if path exists', () => {
