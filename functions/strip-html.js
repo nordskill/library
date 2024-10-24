@@ -7,9 +7,9 @@
  */
 
 function stripHtml(html) {
-    let temp = document.createElement("div");
+    let temp = document.createElement('div');
     temp.innerHTML = html;
-    return temp.textContent || temp.innerText || "";
+    return temp.textContent || temp.innerText || '';
 }
 
 export default stripHtml;

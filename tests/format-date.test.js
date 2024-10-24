@@ -1,28 +1,31 @@
-import formatDate from '../functions/format-date';
+import assert from 'node:assert';
+import { describe, test } from 'node:test';
 
-describe("Get a date in given format", () => {
-    test("No arguments given", () => {
+import formatDate from '../functions/format-date.js';
+
+describe('Get a date in given format', () => {
+    test('No arguments given', () => {
         const result = () => formatDate();
-        expect(result).toThrow();
+        assert.throws(result);
     });
 
-    test("yyyy-mm-dd style", () => {
+    test('yyyy-mm-dd style', () => {
         const result = formatDate(new Date(2024, 7, 17), 'yyyy-mm-dd');
-        expect(result).toBe('2024-08-17');
+        assert.strictEqual(result, '2024-08-17');
     });
 
-    test("yyyymmdd style", () => {
+    test('yyyymmdd style', () => {
         const result = formatDate(new Date(2024, 7, 17), 'yyyymmdd');
-        expect(result).toBe('20240817');
+       assert.strictEqual(result, '20240817');
     });
 
-    test("dd Mon yyyy style", () => {
+    test('dd Mon yyyy style', () => {
         const result = formatDate(new Date(2024, 7, 17), 'dd Mon yyyy');
-        expect(result).toBe('17 Aug 2024')
+        assert.strictEqual(result, '17 Aug 2024')
     })
 
     test('Unknown style', () => {
         const result = formatDate(new Date(2024, 7, 17), 'yymmdd');
-        expect(result).toBeUndefined();
+        assert.strictEqual(result, undefined);
     })
 })

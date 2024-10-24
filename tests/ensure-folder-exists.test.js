@@ -1,23 +1,26 @@
 import path from 'node:path';
-import ensureFolderExists from '../functions/ensure-folder-exists';;
+import assert from 'node:assert';
+import { describe, test } from 'node:test';
+import { fileURLToPath } from 'node:url';
 
-beforeEach(() => {
-    jest.clearAllMocks();
-});
+import ensureFolderExists from '../functions/ensure-folder-exists.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 
 describe('Checking if given path exists', () => {
     test('No path given', async () => {
         const result = await ensureFolderExists();
-        expect(result.success).toBeFalsy();
+        assert.strictEqual(result.success, false);
     });
 
     test('Path exists', async () => {
         const result = await ensureFolderExists(path.join(__dirname, './ensure-folder-exists.test.js'));
-        expect(result.success).toBeTruthy();
+        assert.strictEqual(result.success, true);
     });
 
     test("Path doesn't exist", async () => {
         const result = await ensureFolderExists(path.join(__dirname, '../utils/some-folder'));
-        expect(result.success).toBeTruthy();
+        assert.strictEqual(result.success, true);
     })
 })

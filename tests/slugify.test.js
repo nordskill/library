@@ -1,23 +1,26 @@
-import slugify from '../functions/slugify';
+import assert from 'node:assert';
+import { describe, test } from 'node:test';
 
-describe("Creating a slug of a given string", () => {
+import slugify from '../functions/slugify.js';
+
+describe('Creating a slug of a given string', () => {
     test('returns "undefined" if no input provided', () => {
         const result = slugify();
-        expect(result).toBe("undefined");
+        assert.strictEqual(result, 'undefined');
     });
 
     test('returns empty string if empty string given', () => {
         const result = slugify('');
-        expect(result).toBeFalsy();
+        assert.strictEqual(!!result, false);
     });
 
     test('simple string', () => {
         const result = slugify('hello world');
-        expect(result).toBe('hello-world');
+        assert.strictEqual(result, 'hello-world');
     });
 
     test('complex string with non-aplhabetic characters', () => {
         const result = slugify('welcome--develOpErS#@_--');
-        expect(result).toBe('welcome-developers');
+        assert.strictEqual(result, 'welcome-developers');
     })
 })

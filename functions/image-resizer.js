@@ -2,7 +2,7 @@ import path from 'node:path';
 import sharp from 'sharp';
 import { performance } from 'perf_hooks';
 
-import ensureFolderExists from './ensure-folder-exists';
+import ensureFolderExists from './ensure-folder-exists.js';
 
 const FORMAT = 'webp';
 

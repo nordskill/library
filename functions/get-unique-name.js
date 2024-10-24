@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 
 /**
@@ -60,9 +60,9 @@ async function appendSuffix(folderPath, name, extension = '') {
 }
 
 
-async function getType(path) {
+async function getType(directoryPath) {
     try {
-        const stats = await fs.stat(path);
+        const stats = await fs.stat(directoryPath);
 
         if (stats.isFile()) {
             return 'file';
@@ -70,13 +70,13 @@ async function getType(path) {
             return 'directory';
         }
     } catch (error) {
-        throw new Error(`Failed to determine the type of the path '${path}': ${error.message}`);
+        throw new Error(`Failed to determine the type of the path '${directoryPath}': ${error.message}`);
     }
 }
 
-async function directoryExists(path) {
+async function directoryExists(directoryPath) {
     try {
-        await fs.access(path);
+        await fs.access(directoryPath);
         return true;
     } catch (error) {
         return false;
